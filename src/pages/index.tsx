@@ -169,60 +169,11 @@ const Home: NextPage = () => {
           await ethereumRpc.testSignPersonalMessage(chainId, address);
         },
       },
-      [DEFAULT_EIP155_OPTIONAL_METHODS.ETH_SIGN_TRANSACTION]: {
-        method: DEFAULT_EIP155_OPTIONAL_METHODS.ETH_SIGN_TRANSACTION,
-        callback: async (chainId: string, address: string) => {
-          openRequestModal();
-          await ethereumRpc.testSignTransaction(chainId, address);
-        },
-      },
-      [DEFAULT_EIP155_OPTIONAL_METHODS.ETH_SIGN]: {
-        method: DEFAULT_EIP155_OPTIONAL_METHODS.ETH_SIGN + " (standard)",
-        callback: async (chainId: string, address: string) => {
-          openRequestModal();
-          await ethereumRpc.testEthSign(chainId, address);
-        },
-      },
       [DEFAULT_EIP155_OPTIONAL_METHODS.ETH_SIGN_TYPED_DATA]: {
         method: DEFAULT_EIP155_OPTIONAL_METHODS.ETH_SIGN_TYPED_DATA,
         callback: async (chainId: string, address: string) => {
           openRequestModal();
           await ethereumRpc.testSignTypedData(chainId, address);
-        },
-      },
-      [DEFAULT_EIP155_OPTIONAL_METHODS.ETH_SIGN_TYPED_DATA_V4]: {
-        method: DEFAULT_EIP155_OPTIONAL_METHODS.ETH_SIGN_TYPED_DATA_V4,
-        callback: async (chainId: string, address: string) => {
-          openRequestModal();
-          await ethereumRpc.testSignTypedDatav4(chainId, address);
-        },
-      },
-      [DEFAULT_EIP5792_METHODS.WALLET_GET_CAPABILITIES]: {
-        method: DEFAULT_EIP5792_METHODS.WALLET_GET_CAPABILITIES,
-        callback: async (chainId: string, address: string) => {
-          openRequestLoaderModal();
-          await ethereumRpc.testWalletGetCapabilities(chainId, address);
-        },
-      },
-      [DEFAULT_EIP5792_METHODS.WALLET_SEND_CALLS]: {
-        method: DEFAULT_EIP5792_METHODS.WALLET_SEND_CALLS,
-        callback: async (chainId: string, address: string) => {
-          openRequestModal();
-          await ethereumRpc.testWalletSendCalls(chainId, address);
-        },
-      },
-      [DEFAULT_EIP5792_METHODS.WALLET_GET_CALLS_STATUS]: {
-        method: DEFAULT_EIP5792_METHODS.WALLET_GET_CALLS_STATUS,
-        callback: async (chainId: string, address: string) => {
-          openRequestModal();
-          await ethereumRpc.testWalletGetCallsStatus(chainId, address);
-        },
-      },
-      [DEFAULT_EIP7715_METHODS.WALLET_GRANT_PERMISSIONS]: {
-        method: DEFAULT_EIP7715_METHODS.WALLET_GRANT_PERMISSIONS,
-        callback: async (chainId: string, address: string) => {
-          openRequestModal();
-          await ethereumRpc.testWalletGrantPermissions(chainId, address);
         },
       },
     };
