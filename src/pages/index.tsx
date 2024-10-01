@@ -561,8 +561,6 @@ const Home: NextPage = () => {
         <SButtonContainer>
           <h6>Select chains:</h6>
           <SToggleContainer>
-            <p>Testnets Only?</p>
-            <Toggle active={isTestnet} onClick={toggleTestnets} />
           </SToggleContainer>
           {chainOptions.map((chainId) => (
             <Blockchain
