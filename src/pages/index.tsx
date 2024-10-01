@@ -552,7 +552,7 @@ const Home: NextPage = () => {
   };
 
   const renderContent = () => {
-    const chainOptions = isTestnet ? DEFAULT_TEST_CHAINS : DEFAULT_MAIN_CHAINS;
+    const chainOptions = DEFAULT_TEST_CHAINS;
 
     return !accounts.length && !Object.keys(balances).length ? (
       <SLanding center>

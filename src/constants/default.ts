@@ -23,22 +23,8 @@ export const DEFAULT_MAIN_CHAINS = [
 
 export const DEFAULT_TEST_CHAINS = [
   // testnets
-  "eip155:5",
-  "eip155:11155111",
-  "eip155:280",
-  "eip155:420",
-  "eip155:80001",
-  "eip155:421611",
   "eip155:421614",
-  "eip155:44787",
-  "solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1",
-  "solana:4uhcVJyU9pJkvQyS88uRDiswHXSCkY3z",
-  "polkadot:e143f23803ac50e8f6f8e62695d1ce9e",
-  "near:testnet",
-  "mvx:D",
-  "tron:0xcd8690dc",
-  "tezos:testnet",
-  "kadena:testnet04",
+  "eip155:11155111",
 ];
 
 export const DEFAULT_CHAINS = [...DEFAULT_MAIN_CHAINS, ...DEFAULT_TEST_CHAINS];
