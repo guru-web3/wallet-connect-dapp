@@ -1,4 +1,5 @@
-import { Contract, providers, utils } from "ethers";
+import { Contract, ethers, providers, utils } from "ethers";
+import { verifySignMessageSignatureUniversal } from "./utilities";
 
 const spec = {
   magicValue: "0x1626ba7e",
@@ -44,6 +45,14 @@ async function isValidSignature(
       sig
     );
   } catch (e) {
+    console.log({e});
+    const isValidSignature = verifySignMessageSignatureUniversal({
+      address,
+      signature: sig,
+      hash: data,
+      provider,
+    })
+    console.log({ isValidSignature }, {e});
     return false;
   }
   return returnValue.toLowerCase() === magicValue.toLowerCase();

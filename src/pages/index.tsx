@@ -176,6 +176,13 @@ const Home: NextPage = () => {
           await ethereumRpc.testSignTypedData(chainId, address);
         },
       },
+      [DEFAULT_EIP155_OPTIONAL_METHODS.ETH_SIGN_TYPED_DATA_V4]: {
+        method: DEFAULT_EIP155_OPTIONAL_METHODS.ETH_SIGN_TYPED_DATA_V4,
+        callback: async (chainId: string, address: string) => {
+          openRequestModal();
+          await ethereumRpc.testSignTypedDatav4(chainId, address);
+        },
+      },
     };
 
     let availableActions: AccountAction[] = [];
@@ -227,227 +234,12 @@ const Home: NextPage = () => {
     return false; // Capabilities are not supported or not defined
   };
 
-  const getCosmosActions = (): AccountAction[] => {
-    const onSignDirect = async (chainId: string, address: string) => {
-      openRequestModal();
-      await cosmosRpc.testSignDirect(chainId, address);
-    };
-    const onSignAmino = async (chainId: string, address: string) => {
-      openRequestModal();
-      await cosmosRpc.testSignAmino(chainId, address);
-    };
-    return [
-      {
-        method: DEFAULT_COSMOS_METHODS.COSMOS_SIGN_DIRECT,
-        callback: onSignDirect,
-      },
-      {
-        method: DEFAULT_COSMOS_METHODS.COSMOS_SIGN_AMINO,
-        callback: onSignAmino,
-      },
-    ];
-  };
-
-  const getSolanaActions = (): AccountAction[] => {
-    const onSignTransaction = async (chainId: string, address: string) => {
-      openRequestModal();
-      await solanaRpc.testSignTransaction(chainId, address);
-    };
-    const onSignMessage = async (chainId: string, address: string) => {
-      openRequestModal();
-      await solanaRpc.testSignMessage(chainId, address);
-    };
-    return [
-      {
-        method: DEFAULT_SOLANA_METHODS.SOL_SIGN_TRANSACTION,
-        callback: onSignTransaction,
-      },
-      {
-        method: DEFAULT_SOLANA_METHODS.SOL_SIGN_MESSAGE,
-        callback: onSignMessage,
-      },
-    ];
-  };
-
-  const getPolkadotActions = (): AccountAction[] => {
-    const onSignTransaction = async (chainId: string, address: string) => {
-      openRequestModal();
-      await polkadotRpc.testSignTransaction(chainId, address);
-    };
-    const onSignMessage = async (chainId: string, address: string) => {
-      openRequestModal();
-      await polkadotRpc.testSignMessage(chainId, address);
-    };
-    return [
-      {
-        method: DEFAULT_POLKADOT_METHODS.POLKADOT_SIGN_TRANSACTION,
-        callback: onSignTransaction,
-      },
-      {
-        method: DEFAULT_POLKADOT_METHODS.POLKADOT_SIGN_MESSAGE,
-        callback: onSignMessage,
-      },
-    ];
-  };
-
-  const getNearActions = (): AccountAction[] => {
-    const onSignAndSendTransaction = async (
-      chainId: string,
-      address: string
-    ) => {
-      openRequestModal();
-      await nearRpc.testSignAndSendTransaction(chainId, address);
-    };
-    const onSignAndSendTransactions = async (
-      chainId: string,
-      address: string
-    ) => {
-      openRequestModal();
-      await nearRpc.testSignAndSendTransactions(chainId, address);
-    };
-    return [
-      {
-        method: DEFAULT_NEAR_METHODS.NEAR_SIGN_AND_SEND_TRANSACTION,
-        callback: onSignAndSendTransaction,
-      },
-      {
-        method: DEFAULT_NEAR_METHODS.NEAR_SIGN_AND_SEND_TRANSACTIONS,
-        callback: onSignAndSendTransactions,
-      },
-    ];
-  };
-
-  const getMultiversxActions = (): AccountAction[] => {
-    const onSignTransaction = async (chainId: string, address: string) => {
-      openRequestModal();
-      await multiversxRpc.testSignTransaction(chainId, address);
-    };
-    const onSignTransactions = async (chainId: string, address: string) => {
-      openRequestModal();
-      await multiversxRpc.testSignTransactions(chainId, address);
-    };
-    const onSignMessage = async (chainId: string, address: string) => {
-      openRequestModal();
-      await multiversxRpc.testSignMessage(chainId, address);
-    };
-    return [
-      {
-        method: DEFAULT_MULTIVERSX_METHODS.MULTIVERSX_SIGN_TRANSACTION,
-        callback: onSignTransaction,
-      },
-      {
-        method: DEFAULT_MULTIVERSX_METHODS.MULTIVERSX_SIGN_TRANSACTIONS,
-        callback: onSignTransactions,
-      },
-      {
-        method: DEFAULT_MULTIVERSX_METHODS.MULTIVERSX_SIGN_MESSAGE,
-        callback: onSignMessage,
-      },
-    ];
-  };
-
-  const getTronActions = (): AccountAction[] => {
-    const onSignTransaction = async (chainId: string, address: string) => {
-      openRequestModal();
-      await tronRpc.testSignTransaction(chainId, address);
-    };
-    const onSignMessage = async (chainId: string, address: string) => {
-      openRequestModal();
-      await tronRpc.testSignMessage(chainId, address);
-    };
-    return [
-      {
-        method: DEFAULT_TRON_METHODS.TRON_SIGN_TRANSACTION,
-        callback: onSignTransaction,
-      },
-      {
-        method: DEFAULT_TRON_METHODS.TRON_SIGN_MESSAGE,
-        callback: onSignMessage,
-      },
-    ];
-  };
-
-  const getTezosActions = (): AccountAction[] => {
-    const onGetAccounts = async (chainId: string, address: string) => {
-      openRequestModal();
-      await tezosRpc.testGetAccounts(chainId, address);
-    };
-    const onSignTransaction = async (chainId: string, address: string) => {
-      openRequestModal();
-      await tezosRpc.testSignTransaction(chainId, address);
-    };
-    const onSignMessage = async (chainId: string, address: string) => {
-      openRequestModal();
-      await tezosRpc.testSignMessage(chainId, address);
-    };
-    return [
-      {
-        method: DEFAULT_TEZOS_METHODS.TEZOS_GET_ACCOUNTS,
-        callback: onGetAccounts,
-      },
-      {
-        method: DEFAULT_TEZOS_METHODS.TEZOS_SEND,
-        callback: onSignTransaction,
-      },
-      {
-        method: DEFAULT_TEZOS_METHODS.TEZOS_SIGN,
-        callback: onSignMessage,
-      },
-    ];
-  };
-
-  const getKadenaActions = (): AccountAction[] => {
-    const testGetAccounts = async (chainId: string, address: string) => {
-      openRequestModal();
-      await kadenaRpc.testGetAccounts(chainId, address);
-    };
-    const testSign = async (chainId: string, address: string) => {
-      openRequestModal();
-      await kadenaRpc.testSign(chainId, address);
-    };
-
-    const testSignMessage = async (chainId: string, address: string) => {
-      openRequestModal();
-      await kadenaRpc.testQuicksign(chainId, address);
-    };
-
-    return [
-      {
-        method: DEFAULT_KADENA_METHODS.KADENA_GET_ACCOUNTS,
-        callback: testGetAccounts,
-      },
-      {
-        method: DEFAULT_KADENA_METHODS.KADENA_SIGN,
-        callback: testSign,
-      },
-      {
-        method: DEFAULT_KADENA_METHODS.KADENA_QUICKSIGN,
-        callback: testSignMessage,
-      },
-    ];
-  };
 
   const getBlockchainActions = (account: string) => {
     const [namespace, chainId, address] = account.split(":");
     switch (namespace) {
       case "eip155":
         return getEthereumActions(chainId, address);
-      case "cosmos":
-        return getCosmosActions();
-      case "solana":
-        return getSolanaActions();
-      case "polkadot":
-        return getPolkadotActions();
-      case "near":
-        return getNearActions();
-      case "mvx":
-        return getMultiversxActions();
-      case "tron":
-        return getTronActions();
-      case "tezos":
-        return getTezosActions();
-      case "kadena":
-        return getKadenaActions();
       default:
         break;
     }
