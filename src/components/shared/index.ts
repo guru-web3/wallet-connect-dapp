@@ -29,4 +29,5 @@ export const SKey = styled.div`
 export const SValue = styled.div`
   width: 70%;
   font-family: monospace;
+  max-height: 40vh;
 `;
