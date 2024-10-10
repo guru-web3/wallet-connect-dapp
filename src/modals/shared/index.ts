@@ -4,6 +4,7 @@ export const SModalContainer = styled.div`
   width: 100%;
   position: relative;
   word-wrap: break-word;
+  height: 90vh;
 `;
 
 export const SModalTitle = styled.div`
