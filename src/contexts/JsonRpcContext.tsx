@@ -1,4 +1,4 @@
-import { BigNumber, providers, utils } from "ethers";
+import { BigNumber, utils } from "ethers";
 import { createContext, ReactNode, useContext, useState } from "react";
 import * as encoding from "@walletconnect/encoding";
 import { Transaction as EthTransaction } from "@ethereumjs/tx";
@@ -9,47 +9,20 @@ import {
   verifyAminoSignature,
   verifyDirectSignature,
 } from "cosmos-wallet";
-import bs58 from "bs58";
-import { verifyMessageSignature } from "solana-wallet";
-import {
-  Connection,
-  Keypair,
-  SystemProgram,
-  Transaction as SolanaTransaction,
-  clusterApiUrl,
-} from "@solana/web3.js";
-// @ts-expect-error
-import TronWeb from "tronweb";
-import {
-  IPactCommand,
-  PactCommand,
-  createWalletConnectQuicksign,
-  createWalletConnectSign,
-} from "@kadena/client";
-import { PactNumber } from "@kadena/pactjs";
 import {
   KadenaAccount,
   eip712,
   formatTestBatchCall,
   formatTestTransaction,
   getLocalStorageTestnetFlag,
-  getProviderUrl,
   hashPersonalMessage,
   hashTypedDataMessage,
-  verifySignMessageSignatureUniversal,
   verifySignature,
 } from "../helpers";
 import { useWalletConnectClient } from "./ClientContext";
 import {
   DEFAULT_COSMOS_METHODS,
   DEFAULT_EIP155_METHODS,
-  DEFAULT_SOLANA_METHODS,
-  DEFAULT_POLKADOT_METHODS,
-  DEFAULT_NEAR_METHODS,
-  DEFAULT_MULTIVERSX_METHODS,
-  DEFAULT_TRON_METHODS,
-  DEFAULT_TEZOS_METHODS,
-  DEFAULT_KADENA_METHODS,
   DEFAULT_EIP155_OPTIONAL_METHODS,
   DEFAULT_EIP5792_METHODS,
   SendCallsParams,
@@ -61,17 +34,8 @@ import {
 } from "../constants";
 import { useChainData } from "./ChainDataContext";
 import { rpcProvidersByChainId } from "../../src/helpers/api";
-import { signatureVerify, cryptoWaitReady } from "@polkadot/util-crypto";
 
-import {
-  Transaction as MultiversxTransaction,
-  TransactionPayload,
-  Address,
-  SignableMessage,
-} from "@multiversx/sdk-core";
-import { UserVerifier } from "@multiversx/sdk-wallet/out/userVerifier";
-import { SignClient } from "@walletconnect/sign-client/dist/types/client";
-import { hashMessage, parseEther } from "ethers/lib/utils";
+import { parseEther } from "ethers/lib/utils";
 
 /**
  * Types
@@ -362,21 +326,6 @@ export function JsonRpcContextProvider({
         }
 
         const hashMsg = hashPersonalMessage(message);
-        const hashMsg2 = hashMessage(message);
-
-        // await verifySignMessageSignatureUniversal({
-        //   address,
-        //   signature: signature,
-        //   hash: hashMsg2,
-        //   provider: new providers.JsonRpcProvider(rpc.baseURL),
-        // });
-        
-        // await verifySignMessageSignatureUniversal({
-        //   address,
-        //   signature: signature,
-        //   hash: hashMsg,
-        //   provider: new providers.JsonRpcProvider(rpc.baseURL),
-        // });
 
         const valid = await verifySignature(
           address,
