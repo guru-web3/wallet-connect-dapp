@@ -169,6 +169,13 @@ const Home: NextPage = () => {
           await ethereumRpc.testSignPersonalMessage(chainId, address);
         },
       },
+      [DEFAULT_EIP155_OPTIONAL_METHODS.ETH_SIGN]: {
+        method: DEFAULT_EIP155_OPTIONAL_METHODS.ETH_SIGN,
+        callback: async (chainId: string, address: string) => {
+          openRequestModal();
+          await ethereumRpc.testEthSign(chainId, address);
+        },
+      },
       [DEFAULT_EIP155_OPTIONAL_METHODS.ETH_SIGN_TYPED_DATA]: {
         method: DEFAULT_EIP155_OPTIONAL_METHODS.ETH_SIGN_TYPED_DATA,
         callback: async (chainId: string, address: string) => {
